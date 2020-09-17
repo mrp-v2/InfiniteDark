@@ -1,0 +1,45 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "dark",
+  "ingredients": [
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    {
+      "tag": "forge:cobblestone"
+    },
+    [
+      {
+        "tag": "forge:dyes/black"
+      },
+      {
+        "item": "minecraft:coal"
+      },
+      {
+        "item": "minecraft:charcoal"
+      }
+    ]
+  ],
+  "result": {
+    "item": "infinitedark:dark",
+    "count": 8
+  }
+}

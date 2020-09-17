@@ -1,0 +1,6 @@
+{
+  "parent": "infinitedark:block/cube_all_tinted",
+  "textures": {
+    "all": "infinitedark:block/dark"
+  }
+}

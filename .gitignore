@@ -10,3 +10,4 @@
 
 # other
 /run/
+/src/generated/resources/.cache/

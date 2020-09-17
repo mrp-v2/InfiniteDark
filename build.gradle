@@ -25,6 +25,15 @@ group = "${author}.${archivesBaseName}"
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' +
         System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+sourceSets {
+    main {
+        resources {
+            srcDirs 'src/generated/resources'
+        }
+    }
+}
+
 minecraft {
     mappings channel: mappingsChannel, version: mappingsVersion
     runs {
@@ -52,7 +61,8 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            args '--mod', modId, '--all', '--output', file('src/generated/resources/')
+            args '--mod', modId, '--all', '--output', file('src/generated/resources/'), '--existing',
+                    sourceSets.main.output.resourcesDir
             mods {
                 infinitedark {
                     source sourceSets.main
