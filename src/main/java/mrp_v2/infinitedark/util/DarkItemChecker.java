@@ -3,6 +3,7 @@ package mrp_v2.infinitedark.util;
 import mrp_v2.infinitedark.InfiniteDark;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -34,6 +35,10 @@ import net.minecraftforge.fml.common.Mod;
 
     private static void updateDarkBlocks()
     {
+        for (ChunkRenderDispatcher.ChunkRender chunkRender : Minecraft.getInstance().worldRenderer.viewFrustum.renderChunks)
+        {
+            chunkRender.setNeedsUpdate(false);
+        }
     }
 
     public static boolean isHoldingDarkItem()

@@ -1,8 +1,10 @@
 package mrp_v2.infinitedark.block;
 
+import mrp_v2.infinitedark.InfiniteDark;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.fml.common.Mod;
 
-public class DarkBlock extends BaseBlock
+@Mod.EventBusSubscriber(modid = InfiniteDark.ID) public class DarkBlock extends BaseBlock
 {
     public static final String ID = "dark";
 

@@ -1,6 +1,7 @@
 package mrp_v2.infinitedark.client.renderer.color;
 
 import mrp_v2.infinitedark.InfiniteDark;
+import mrp_v2.infinitedark.config.ClientConfig;
 import mrp_v2.infinitedark.util.DarkItemChecker;
 import mrp_v2.infinitedark.util.ObjectHolder;
 import net.minecraft.block.BlockState;
@@ -41,7 +42,7 @@ import javax.annotation.Nullable;
 
     private static int getColor()
     {
-        return DarkItemChecker.isHoldingDarkItem() ? 0xF0F0F0 : 0;
+        return DarkItemChecker.isHoldingDarkItem() ? ClientConfig.INSTANCE.getColor() : 0;
     }
 
     @Override public int getColor(ItemStack p_getColor_1_, int p_getColor_2_)
