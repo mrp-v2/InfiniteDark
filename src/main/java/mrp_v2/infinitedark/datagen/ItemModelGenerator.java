@@ -1,7 +1,8 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.InfiniteDark;
-import mrp_v2.infinitedark.util.ObjectHolder;
+import mrp_v2.infinitedark.block.DarkBlock;
+import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.util.Util;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -16,7 +17,8 @@ public class ItemModelGenerator extends ItemModelProvider
 
     @Override protected void registerModels()
     {
-        this.withExistingParent(Util.getId(ObjectHolder.DARK_BLOCK_ITEM),
-                Util.makeLoc("block/" + Util.getId(ObjectHolder.DARK_BLOCK)));
+        this.withExistingParent(DarkBlock.ID.getPath(), Util.makeLoc("block/" + DarkBlock.ID.getPath()));
+        this.withExistingParent(DarkSlabBlock.ID.getPath(),
+                Util.makeLoc("block/" + DarkSlabBlock.ID.getPath()));
     }
 }

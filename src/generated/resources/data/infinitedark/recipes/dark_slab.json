@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "dark_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "infinitedark:dark"
+    }
+  },
+  "result": {
+    "item": "infinitedark:dark_slab",
+    "count": 6
+  }
+}

@@ -11,7 +11,7 @@ import net.minecraft.data.loot.BlockLootTables;
 import net.minecraft.loot.*;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.ArrayList;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -48,25 +48,27 @@ public class LootTableGenerator extends LootTableProvider
 
     private static class LootTables extends BlockLootTables
     {
-        private final ArrayList<Block> knownBlocks;
+        private final IdentityHashMap<Block, Consumer<Block>> knownBlocks;
 
         public LootTables()
         {
-            this.knownBlocks = new ArrayList<>();
-            this.knownBlocks.add(ObjectHolder.DARK_BLOCK);
+            this.knownBlocks = new IdentityHashMap<>();
+            this.knownBlocks.put(ObjectHolder.DARK_BLOCK.get(), this::registerDropSelfLootTable);
+            this.knownBlocks.put(ObjectHolder.DARK_SLAB_BLOCK.get(),
+                    (block) -> this.registerLootTable(block, BlockLootTables::droppingSlab));
         }
 
         @Override protected void addTables()
         {
-            for (Block knownBlock : this.knownBlocks)
+            for (Block knownBlock : this.knownBlocks.keySet())
             {
-                this.registerDropSelfLootTable(knownBlock);
+                this.knownBlocks.get(knownBlock).accept(knownBlock);
             }
         }
 
         @Override protected Iterable<Block> getKnownBlocks()
         {
-            return this.knownBlocks;
+            return this.knownBlocks.keySet();
         }
     }
 }

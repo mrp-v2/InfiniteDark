@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "infinitedark:dark"
+    "infinitedark:dark",
+    "infinitedark:dark_slab"
   ]
 }

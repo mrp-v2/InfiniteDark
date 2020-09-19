@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "infinitedark:block/dark_slab_top"
+    },
+    "type=bottom": {
+      "model": "infinitedark:block/dark_slab"
+    },
+    "type=double": {
+      "model": "infinitedark:block/dark"
+    }
+  }
+}

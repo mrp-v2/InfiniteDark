@@ -19,7 +19,8 @@ public class ItemTagGenerator extends ItemTagsProvider
 
     @Override protected void registerTags()
     {
-        this.getOrCreateBuilder(ObjectHolder.DARK_ITEMS_TAG).add(ObjectHolder.DARK_BLOCK_ITEM);
+        this.getOrCreateBuilder(ObjectHolder.DARK_ITEMS_TAG)
+                .add(ObjectHolder.DARK_BLOCK_ITEM.get(), ObjectHolder.DARK_SLAB_BLOCK_ITEM.get());
     }
 
     @Override public String getName()

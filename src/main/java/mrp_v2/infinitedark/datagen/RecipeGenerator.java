@@ -1,12 +1,10 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.InfiniteDark;
+import mrp_v2.infinitedark.block.DarkBlock;
+import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.util.ObjectHolder;
-import mrp_v2.infinitedark.util.Util;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.RecipeProvider;
-import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
@@ -28,11 +26,17 @@ public class RecipeGenerator extends RecipeProvider
         acceptedBlackDyes.add(Ingredient.fromTag(Tags.Items.DYES_BLACK));
         acceptedBlackDyes.add(Ingredient.fromItems(Items.COAL, Items.CHARCOAL));
         Ingredient blacks = Ingredient.merge(acceptedBlackDyes);
-        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_BLOCK, 8)
+        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_BLOCK.get(), 8)
                 .addIngredient(cobble, 8)
                 .addIngredient(blacks)
-                .setGroup(Util.getId(ObjectHolder.DARK_BLOCK))
+                .setGroup(DarkBlock.ID.getPath())
                 .addCriterion("has_cobble", hasItem(Tags.Items.COBBLESTONE))
+                .build(iFinishedRecipeConsumer);
+        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.DARK_SLAB_BLOCK.get(), 6)
+                .patternLine("###")
+                .key('#', ObjectHolder.DARK_BLOCK.get())
+                .setGroup(DarkSlabBlock.ID.getPath())
+                .addCriterion("has_dark_block", hasItem(ObjectHolder.DARK_BLOCK.get()))
                 .build(iFinishedRecipeConsumer);
     }
 
