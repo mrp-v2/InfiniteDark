@@ -1,10 +1,12 @@
 package mrp_v2.infinitedark.datagen;
 
-import mrp_v2.infinitedark.InfiniteDark;
 import mrp_v2.infinitedark.block.DarkBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.util.ObjectHolder;
-import net.minecraft.data.*;
+import net.minecraft.data.DataGenerator;
+import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
@@ -12,11 +14,11 @@ import net.minecraftforge.common.Tags;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class RecipeGenerator extends RecipeProvider
+public class RecipeGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.RecipeGenerator
 {
-    public RecipeGenerator(DataGenerator generatorIn)
+    protected RecipeGenerator(DataGenerator dataGeneratorIn, String modId)
     {
-        super(generatorIn);
+        super(dataGeneratorIn, modId);
     }
 
     @Override protected void registerRecipes(Consumer<IFinishedRecipe> iFinishedRecipeConsumer)
@@ -38,10 +40,5 @@ public class RecipeGenerator extends RecipeProvider
                 .setGroup(DarkSlabBlock.ID.getPath())
                 .addCriterion("has_dark_block", hasItem(ObjectHolder.DARK_BLOCK.get()))
                 .build(iFinishedRecipeConsumer);
-    }
-
-    @Override public String getName()
-    {
-        return super.getName() + ": " + InfiniteDark.ID;
     }
 }

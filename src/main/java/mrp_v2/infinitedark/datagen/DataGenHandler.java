@@ -1,9 +1,7 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.InfiniteDark;
-import net.minecraft.data.BlockTagsProvider;
-import net.minecraft.data.DataGenerator;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import mrp_v2.mrp_v2datagenlibrary.datagen.DataGeneratorHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
@@ -12,20 +10,17 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 {
     @SubscribeEvent public static void registerDataProviders(final GatherDataEvent event)
     {
-        DataGenerator generator = event.getGenerator();
-        ExistingFileHelper fileHelper = event.getExistingFileHelper();
+        DataGeneratorHelper helper = new DataGeneratorHelper(event, InfiniteDark.ID);
         if (event.includeServer())
         {
-            generator.addProvider(new LootTableGenerator(generator));
-            generator.addProvider(new RecipeGenerator(generator));
-            BlockTagsProvider blockTagsProvider = new BlockTagsProvider(generator, InfiniteDark.ID, fileHelper);
-            generator.addProvider(new ItemTagGenerator(generator, blockTagsProvider, fileHelper));
+            helper.addLootTables(new LootTables());
+            helper.addRecipeGenerator(RecipeGenerator::new);
+            helper.addItemTagGenerator(ItemTagGenerator::new);
         }
         if (event.includeClient())
         {
-            generator.addProvider(new BlockModelGenerator(generator, fileHelper));
-            generator.addProvider(new BlockStateGenerator(generator, fileHelper));
-            generator.addProvider(new ItemModelGenerator(generator, fileHelper));
+            helper.addBlockStateProvider(BlockStateGenerator::new);
+            helper.addItemModelProvider(ItemModelGenerator::new);
         }
     }
 }

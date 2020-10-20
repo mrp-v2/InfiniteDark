@@ -3,6 +3,7 @@ package mrp_v2.infinitedark.util;
 import mrp_v2.infinitedark.InfiniteDark;
 import mrp_v2.infinitedark.block.DarkBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
+import mrp_v2.infinitedark.block.DarkStairsBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -29,6 +30,8 @@ import java.util.function.Function;
     public static final RegistryObject<Item> DARK_BLOCK_ITEM;
     public static final RegistryObject<Block> DARK_SLAB_BLOCK;
     public static final RegistryObject<Item> DARK_SLAB_BLOCK_ITEM;
+    public static final RegistryObject<Block> DARK_STAIRS_BLOCK;
+    public static final RegistryObject<Item> DARK_STAIRS_BLOCK_ITEM;
 
     static
     {
@@ -43,6 +46,8 @@ import java.util.function.Function;
         DARK_BLOCK_ITEM = createItemRegistryObject(DarkBlock.ID);
         DARK_SLAB_BLOCK = createBlockRegistryObject(DarkSlabBlock.ID);
         DARK_SLAB_BLOCK_ITEM = createItemRegistryObject(DarkSlabBlock.ID);
+        DARK_STAIRS_BLOCK = createBlockRegistryObject(DarkStairsBlock.ID);
+        DARK_STAIRS_BLOCK_ITEM = createItemRegistryObject(DarkStairsBlock.ID);
     }
 
     private static RegistryObject<Block> createBlockRegistryObject(ResourceLocation name)
@@ -63,12 +68,14 @@ import java.util.function.Function;
 
     @SubscribeEvent public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
-        event.getRegistry().registerAll(new DarkBlock(), new DarkSlabBlock());
+        event.getRegistry().registerAll(new DarkBlock(), new DarkSlabBlock(), new DarkStairsBlock());
     }
 
     @SubscribeEvent public static void registerItems(RegistryEvent.Register<Item> event)
     {
-        event.getRegistry().registerAll(createBlockItem(DARK_BLOCK), createBlockItem(DARK_SLAB_BLOCK));
+        event.getRegistry()
+                .registerAll(createBlockItem(DARK_BLOCK), createBlockItem(DARK_SLAB_BLOCK),
+                        createBlockItem(DARK_STAIRS_BLOCK));
     }
 
     private static Item createBlockItem(RegistryObject<Block> block)
