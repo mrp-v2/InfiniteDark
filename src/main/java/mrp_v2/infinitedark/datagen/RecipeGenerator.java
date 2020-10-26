@@ -28,17 +28,17 @@ public class RecipeGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.RecipeG
         acceptedBlackDyes.add(Ingredient.fromTag(Tags.Items.DYES_BLACK));
         acceptedBlackDyes.add(Ingredient.fromItems(Items.COAL, Items.CHARCOAL));
         Ingredient blacks = Ingredient.merge(acceptedBlackDyes);
-        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_BLOCK.get(), 8)
+        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_BLOCK, 8)
                 .addIngredient(cobble, 8)
                 .addIngredient(blacks)
                 .setGroup(DarkBlock.ID.getPath())
                 .addCriterion("has_cobble", hasItem(Tags.Items.COBBLESTONE))
                 .build(iFinishedRecipeConsumer);
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.DARK_SLAB_BLOCK.get(), 6)
+        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.DARK_SLAB_BLOCK, 6)
                 .patternLine("###")
-                .key('#', ObjectHolder.DARK_BLOCK.get())
+                .key('#', ObjectHolder.DARK_BLOCK)
                 .setGroup(DarkSlabBlock.ID.getPath())
-                .addCriterion("has_dark_block", hasItem(ObjectHolder.DARK_BLOCK.get()))
+                .addCriterion("has_dark_block", hasItem(ObjectHolder.DARK_BLOCK))
                 .build(iFinishedRecipeConsumer);
     }
 }

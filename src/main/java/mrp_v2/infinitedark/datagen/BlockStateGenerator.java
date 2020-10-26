@@ -2,9 +2,9 @@ package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.block.DarkBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
+import mrp_v2.infinitedark.block.DarkStairsBlock;
 import mrp_v2.infinitedark.util.ObjectHolder;
 import mrp_v2.infinitedark.util.Util;
-import net.minecraft.block.SlabBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -44,9 +44,9 @@ public class BlockStateGenerator extends BlockStateProvider
         this.registerSlabModels();
         this.registerStairModels();
         final String darkTexLoc = "block/dark";
-        this.simpleBlock(ObjectHolder.DARK_BLOCK.get(),
+        this.simpleBlock(ObjectHolder.DARK_BLOCK,
                 this.models().withExistingParent(DarkBlock.ID.getPath(), CUBE_ALL_TINTED).texture("all", darkTexLoc));
-        this.slabBlock((SlabBlock) ObjectHolder.DARK_SLAB_BLOCK.get(),
+        this.slabBlock(ObjectHolder.DARK_SLAB_BLOCK,
                 models().withExistingParent(DarkSlabBlock.ID.getPath(), SLAB_TINTED)
                         .texture("side", darkTexLoc)
                         .texture("top", darkTexLoc)
@@ -56,6 +56,19 @@ public class BlockStateGenerator extends BlockStateProvider
                         .texture("top", darkTexLoc)
                         .texture("bottom", darkTexLoc),
                 models().getExistingFile(Util.makeLoc("block/" + DarkBlock.ID.getPath())));
+        this.stairsBlock(ObjectHolder.DARK_STAIRS_BLOCK, this.models()
+                .withExistingParent(DarkStairsBlock.ID.getPath(), STAIRS_TINTED)
+                .texture("side", darkTexLoc)
+                .texture("top", darkTexLoc)
+                .texture("bottom", darkTexLoc), this.models()
+                .withExistingParent(DarkStairsBlock.ID.getPath() + "_inner", STAIRS_INNER_TINTED)
+                .texture("side", darkTexLoc)
+                .texture("top", darkTexLoc)
+                .texture("bottom", darkTexLoc), this.models()
+                .withExistingParent(DarkStairsBlock.ID.getPath() + "_outer", STAIRS_OUTER_TINTED)
+                .texture("side", darkTexLoc)
+                .texture("top", darkTexLoc)
+                .texture("bottom", darkTexLoc));
     }
 
     private void registerFullBlockModels()
@@ -148,6 +161,7 @@ public class BlockStateGenerator extends BlockStateProvider
             basicFaceBuilder.accept(elementBuilder, new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST});
             elementBuilder.face(Direction.UP).texture("#top").cullface(Direction.UP).end();
             elementBuilder.face(Direction.WEST).texture("#side").end();
+            elementBuilder.faces(tintFunction);
         };
         ModelBuilder<BlockModelBuilder> stairsBuilder = this.models()
                 .withExistingParent(STAIRS_TINTED.toString(), mcLoc("block/block"))
@@ -173,8 +187,51 @@ public class BlockStateGenerator extends BlockStateProvider
                 this.models().getBuilder(STAIRS_INNER_TINTED.toString()).texture("particle", "#side");
         firstElementBuilder.accept(stairsInnerBuilder);
         stairsAndInnerSecondElementBuilder.accept(stairsInnerBuilder);
-        ModelBuilder<BlockModelBuilder> stairsOuterElementBuilder =
+        stairsInnerBuilder.element()
+                .from(0, 8, 8)
+                .to(8, 16, 16)
+                .face(Direction.UP)
+                .cullface(Direction.UP)
+                .texture("#top")
+                .end()
+                .face(Direction.NORTH)
+                .texture("#side")
+                .end()
+                .face(Direction.SOUTH)
+                .cullface(Direction.SOUTH)
+                .texture("#side")
+                .end()
+                .face(Direction.WEST)
+                .cullface(Direction.WEST)
+                .texture("#side")
+                .end()
+                .faces(tintFunction)
+                .end();
+        ModelBuilder<BlockModelBuilder> stairsOuterBuilder =
                 this.models().getBuilder(STAIRS_OUTER_TINTED.toString()).texture("particle", "#side");
-        basicFaceBuilder.accept(stairsOuterElementBuilder, new Direction[]{Direction.SOUTH, Direction.EAST});
+        firstElementBuilder.accept(stairsOuterBuilder);
+        stairsOuterBuilder.element()
+                .from(8, 8, 8)
+                .to(16, 16, 16)
+                .face(Direction.UP)
+                .cullface(Direction.UP)
+                .texture("#top")
+                .end()
+                .face(Direction.NORTH)
+                .texture("#side")
+                .end()
+                .face(Direction.SOUTH)
+                .cullface(Direction.SOUTH)
+                .texture("#side")
+                .end()
+                .face(Direction.WEST)
+                .texture("#side")
+                .end()
+                .face(Direction.EAST)
+                .cullface(Direction.EAST)
+                .texture("#side")
+                .end()
+                .faces(tintFunction)
+                .end();
     }
 }

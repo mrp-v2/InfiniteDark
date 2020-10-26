@@ -11,7 +11,7 @@ public class DarkStairsBlock extends StairsBlock
 
     public DarkStairsBlock()
     {
-        super(ObjectHolder.DARK_BLOCK.get().getDefaultState(), Properties.from(DarkBlock.PARENT_BLOCK));
+        super(ObjectHolder.DARK_BLOCK.getDefaultState(), Properties.from(DarkBlock.PARENT_BLOCK));
         this.setRegistryName(ID);
     }
 }
