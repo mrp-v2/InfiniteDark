@@ -5,8 +5,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class Util
 {
-    public static ResourceLocation makeLoc(String parts)
+    public static ResourceLocation makeLoc(String path)
     {
-        return new ResourceLocation(InfiniteDark.ID, parts);
+        return new ResourceLocation(InfiniteDark.ID, path);
     }
 }

@@ -19,6 +19,6 @@ public class ItemTagGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.ItemTa
     {
         this.getOrCreateBuilder(ObjectHolder.DARK_ITEMS_TAG)
                 .add(ObjectHolder.DARK_BLOCK_ITEM, ObjectHolder.DARK_SLAB_BLOCK_ITEM,
-                        ObjectHolder.DARK_STAIRS_BLOCK_ITEM);
+                        ObjectHolder.DARK_STAIRS_BLOCK_ITEM, ObjectHolder.DARK_GLASS_BLOCK_ITEM);
     }
 }

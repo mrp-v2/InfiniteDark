@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "dark_stairs",
+    "pattern": [
+        "#  ", "## ", "###"
+    ],
+    "key": {
+        "#": {
+            "item": "infinitedark:dark"
+        }
+    },
+    "result": {
+        "item": "infinitedark:dark_stairs",
+        "count": 4
+    }
+}

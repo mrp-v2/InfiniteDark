@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "infinitedark:dark",
-    "infinitedark:dark_slab",
-    "infinitedark:dark_stairs"
+      "infinitedark:dark", "infinitedark:dark_slab", "infinitedark:dark_stairs", "infinitedark:dark_glass"
   ]
 }

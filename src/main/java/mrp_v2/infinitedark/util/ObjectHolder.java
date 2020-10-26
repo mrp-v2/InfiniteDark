@@ -2,6 +2,7 @@ package mrp_v2.infinitedark.util;
 
 import mrp_v2.infinitedark.InfiniteDark;
 import mrp_v2.infinitedark.block.DarkBlock;
+import mrp_v2.infinitedark.block.DarkGlassBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.block.DarkStairsBlock;
 import net.minecraft.block.Block;
@@ -29,6 +30,8 @@ import java.util.function.Function;
     public static final BlockItem DARK_SLAB_BLOCK_ITEM;
     public static final DarkStairsBlock DARK_STAIRS_BLOCK;
     public static final BlockItem DARK_STAIRS_BLOCK_ITEM;
+    public static final DarkGlassBlock DARK_GLASS_BLOCK;
+    public static final BlockItem DARK_GLASS_BLOCK_ITEM;
 
     static
     {
@@ -45,16 +48,19 @@ import java.util.function.Function;
         DARK_SLAB_BLOCK_ITEM = createBlockItem(DARK_SLAB_BLOCK);
         DARK_STAIRS_BLOCK = new DarkStairsBlock();
         DARK_STAIRS_BLOCK_ITEM = createBlockItem(DARK_STAIRS_BLOCK);
+        DARK_GLASS_BLOCK = new DarkGlassBlock();
+        DARK_GLASS_BLOCK_ITEM = createBlockItem(DARK_GLASS_BLOCK);
     }
 
     @SubscribeEvent public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
-        event.getRegistry().registerAll(DARK_BLOCK, DARK_SLAB_BLOCK, DARK_STAIRS_BLOCK);
+        event.getRegistry().registerAll(DARK_BLOCK, DARK_SLAB_BLOCK, DARK_STAIRS_BLOCK, DARK_GLASS_BLOCK);
     }
 
     @SubscribeEvent public static void registerItems(RegistryEvent.Register<Item> event)
     {
-        event.getRegistry().registerAll(DARK_BLOCK_ITEM, DARK_SLAB_BLOCK_ITEM, DARK_STAIRS_BLOCK_ITEM);
+        event.getRegistry()
+                .registerAll(DARK_BLOCK_ITEM, DARK_SLAB_BLOCK_ITEM, DARK_STAIRS_BLOCK_ITEM, DARK_GLASS_BLOCK_ITEM);
     }
 
     private static BlockItem createBlockItem(Block block)

@@ -27,14 +27,14 @@ import javax.annotation.Nullable;
     {
         event.getBlockColors()
                 .register(INSTANCE, ObjectHolder.DARK_BLOCK, ObjectHolder.DARK_SLAB_BLOCK,
-                        ObjectHolder.DARK_STAIRS_BLOCK);
+                        ObjectHolder.DARK_STAIRS_BLOCK, ObjectHolder.DARK_GLASS_BLOCK);
     }
 
     @SubscribeEvent public static void registerItemColors(ColorHandlerEvent.Item event)
     {
         event.getItemColors()
                 .register(INSTANCE, ObjectHolder.DARK_BLOCK_ITEM, ObjectHolder.DARK_SLAB_BLOCK_ITEM,
-                        ObjectHolder.DARK_STAIRS_BLOCK_ITEM);
+                        ObjectHolder.DARK_STAIRS_BLOCK_ITEM, ObjectHolder.DARK_GLASS_BLOCK_ITEM);
     }
 
     @Override
