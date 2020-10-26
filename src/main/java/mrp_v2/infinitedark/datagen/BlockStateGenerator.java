@@ -14,6 +14,7 @@ import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 public class BlockStateGenerator extends BlockStateProvider
@@ -136,10 +137,7 @@ public class BlockStateGenerator extends BlockStateProvider
                     .face(Direction.DOWN)
                     .texture("#bottom")
                     .cullface(Direction.DOWN)
-                    .end()
-                    .face(Direction.UP)
-                    .texture("#top")
-                    .end();
+                    .end().face(Direction.UP).texture("#top").end();
             for (Direction side : Direction.Plane.HORIZONTAL)
             {
                 elementBuilder.face(side).texture("#side").cullface(side).end();
@@ -147,18 +145,21 @@ public class BlockStateGenerator extends BlockStateProvider
             elementBuilder.end();
             elementBuilder.faces(tintFunction);
         };
-        BiConsumer<ModelBuilder<BlockModelBuilder>.ElementBuilder, Direction[]> basicFaceBuilder =
-                (builder, directions) ->
-                {
-                    for (Direction side : directions)
-                    {
-                        builder.face(side).texture("#side").cullface(side).end();
-                    }
-                };
+        BiFunction<ModelBuilder<BlockModelBuilder>.ElementBuilder, Direction[], ModelBuilder<BlockModelBuilder>.ElementBuilder>
+                basicCullFaceBuilder = (builder, directions) ->
+        {
+            for (Direction side : directions)
+            {
+                builder.face(side).texture("#side").cullface(side).end();
+            }
+            return builder;
+        };
         Consumer<ModelBuilder<BlockModelBuilder>> stairsAndInnerSecondElementBuilder = (builder) ->
         {
-            ModelBuilder<BlockModelBuilder>.ElementBuilder elementBuilder = builder.element();
-            basicFaceBuilder.accept(elementBuilder, new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST});
+            ModelBuilder<BlockModelBuilder>.ElementBuilder elementBuilder =
+                    builder.element().from(8, 8, 0).to(16, 16, 16);
+            basicCullFaceBuilder.apply(elementBuilder,
+                    new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST});
             elementBuilder.face(Direction.UP).texture("#top").cullface(Direction.UP).end();
             elementBuilder.face(Direction.WEST).texture("#side").end();
             elementBuilder.faces(tintFunction);
@@ -187,7 +188,7 @@ public class BlockStateGenerator extends BlockStateProvider
                 this.models().getBuilder(STAIRS_INNER_TINTED.toString()).texture("particle", "#side");
         firstElementBuilder.accept(stairsInnerBuilder);
         stairsAndInnerSecondElementBuilder.accept(stairsInnerBuilder);
-        stairsInnerBuilder.element()
+        basicCullFaceBuilder.apply(stairsInnerBuilder.element()
                 .from(0, 8, 8)
                 .to(8, 16, 16)
                 .face(Direction.UP)
@@ -196,17 +197,7 @@ public class BlockStateGenerator extends BlockStateProvider
                 .end()
                 .face(Direction.NORTH)
                 .texture("#side")
-                .end()
-                .face(Direction.SOUTH)
-                .cullface(Direction.SOUTH)
-                .texture("#side")
-                .end()
-                .face(Direction.WEST)
-                .cullface(Direction.WEST)
-                .texture("#side")
-                .end()
-                .faces(tintFunction)
-                .end();
+                .end(), new Direction[]{Direction.SOUTH, Direction.WEST}).faces(tintFunction).end();
         ModelBuilder<BlockModelBuilder> stairsOuterBuilder =
                 this.models().getBuilder(STAIRS_OUTER_TINTED.toString()).texture("particle", "#side");
         firstElementBuilder.accept(stairsOuterBuilder);
