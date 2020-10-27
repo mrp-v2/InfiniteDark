@@ -12,7 +12,7 @@ public class DarkBlock extends Block
 
     public DarkBlock()
     {
-        super(Properties.from(PARENT_BLOCK));
+        super(Properties.from(PARENT_BLOCK).setAllowsSpawn(Blocks::neverAllowSpawn));
         this.setRegistryName(ID);
     }
 }

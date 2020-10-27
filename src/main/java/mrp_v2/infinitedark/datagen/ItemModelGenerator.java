@@ -1,10 +1,13 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.block.DarkBlock;
+import mrp_v2.infinitedark.block.DarkGlassBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.block.DarkStairsBlock;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
+import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class ItemModelGenerator extends ItemModelProvider
@@ -16,8 +19,14 @@ public class ItemModelGenerator extends ItemModelProvider
 
     @Override protected void registerModels()
     {
-        this.withExistingParent(DarkBlock.ID.getPath(), modLoc("block/" + DarkBlock.ID.getPath()));
-        this.withExistingParent(DarkSlabBlock.ID.getPath(), modLoc("block/" + DarkSlabBlock.ID.getPath()));
-        this.withExistingParent(DarkStairsBlock.ID.getPath(), modLoc("block/" + DarkStairsBlock.ID.getPath()));
+        this.simpleWithExistingParent(DarkBlock.ID.getPath());
+        this.simpleWithExistingParent(DarkSlabBlock.ID.getPath());
+        this.simpleWithExistingParent(DarkStairsBlock.ID.getPath());
+        this.simpleWithExistingParent(DarkGlassBlock.ID.getPath());
+    }
+
+    private ModelBuilder<ItemModelBuilder> simpleWithExistingParent(String path)
+    {
+        return this.withExistingParent(path, modLoc("block/" + path));
     }
 }

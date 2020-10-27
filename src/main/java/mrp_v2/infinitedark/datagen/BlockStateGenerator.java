@@ -1,29 +1,26 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.block.DarkBlock;
+import mrp_v2.infinitedark.block.DarkGlassBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.block.DarkStairsBlock;
-import mrp_v2.infinitedark.util.Consumer4;
 import mrp_v2.infinitedark.util.ObjectHolder;
 import mrp_v2.infinitedark.util.Util;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import org.apache.commons.lang3.tuple.Pair;
 
+import java.util.HashMap;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 public class BlockStateGenerator extends BlockStateProvider
 {
-    public static final ResourceLocation CUBE_FACE_NORTH = makeLoc("cube_face_north");
-    public static final ResourceLocation CUBE_FACE_NORTH_TINTED = makeTintedLoc("cube_face_north");
     public static final ResourceLocation CUBE_TINTED = makeTintedLoc("cube");
     public static final ResourceLocation CUBE_ALL_TINTED = makeTintedLoc("cube_all");
     public static final ResourceLocation SLAB_TINTED = makeTintedLoc("slab");
@@ -31,8 +28,20 @@ public class BlockStateGenerator extends BlockStateProvider
     public static final ResourceLocation STAIRS_TINTED = makeTintedLoc("stairs");
     public static final ResourceLocation STAIRS_INNER_TINTED = makeTintedLoc("stairs_inner");
     public static final ResourceLocation STAIRS_OUTER_TINTED = makeTintedLoc("stairs_outer");
+    public static final HashMap<Direction, Pair<Integer, Integer>> FACE_ROTATION_MAP;
     private static final BiConsumer<Direction, ModelBuilder<BlockModelBuilder>.ElementBuilder.FaceBuilder>
             tintFunction = (direction, builder) -> builder.tintindex(0);
+
+    static
+    {
+        FACE_ROTATION_MAP = new HashMap<>();
+        FACE_ROTATION_MAP.put(Direction.NORTH, Pair.of(0, 0));
+        FACE_ROTATION_MAP.put(Direction.EAST, Pair.of(0, 90));
+        FACE_ROTATION_MAP.put(Direction.SOUTH, Pair.of(0, 180));
+        FACE_ROTATION_MAP.put(Direction.WEST, Pair.of(0, -90));
+        FACE_ROTATION_MAP.put(Direction.UP, Pair.of(-90, 0));
+        FACE_ROTATION_MAP.put(Direction.DOWN, Pair.of(90, 0));
+    }
 
     public BlockStateGenerator(DataGenerator gen, String modid, ExistingFileHelper exFileHelper)
     {
@@ -54,7 +63,6 @@ public class BlockStateGenerator extends BlockStateProvider
         this.registerFullBlockModels();
         this.registerSlabModels();
         this.registerStairModels();
-        this.registerSingleFaceModels();
         final String darkTexLoc = "block/dark";
         this.simpleBlock(ObjectHolder.DARK_BLOCK,
                 this.models().withExistingParent(DarkBlock.ID.getPath(), CUBE_ALL_TINTED).texture("all", darkTexLoc));
@@ -71,8 +79,7 @@ public class BlockStateGenerator extends BlockStateProvider
         this.stairsBlock(ObjectHolder.DARK_STAIRS_BLOCK, this.models()
                 .withExistingParent(DarkStairsBlock.ID.getPath(), STAIRS_TINTED)
                 .texture("side", darkTexLoc)
-                .texture("top", darkTexLoc)
-                .texture("bottom", darkTexLoc), this.models()
+                .texture("top", darkTexLoc).texture("bottom", darkTexLoc), this.models()
                 .withExistingParent(DarkStairsBlock.ID.getPath() + "_inner", STAIRS_INNER_TINTED)
                 .texture("side", darkTexLoc)
                 .texture("top", darkTexLoc)
@@ -82,51 +89,31 @@ public class BlockStateGenerator extends BlockStateProvider
                 .texture("top", darkTexLoc)
                 .texture("bottom", darkTexLoc));
         final ResourceLocation glassTexLoc = mcLoc("block/glass");
-        ModelFile darkFaceModel = this.models()
-                .withExistingParent(DarkBlock.ID.getPath() + "_face", CUBE_FACE_NORTH_TINTED)
-                .texture("face", darkTexLoc);
-        ModelFile glassFaceModel = this.models()
-                .withExistingParent(Blocks.GLASS.getRegistryName().getPath() + "_face", CUBE_FACE_NORTH)
-                .texture("face", glassTexLoc);
-        Consumer4<MultiPartBlockStateBuilder, BooleanProperty, Integer, Integer> glassPartBuilder =
-                (builder, face, rotX, rotY) -> builder.part()
-                        .modelFile(darkFaceModel)
-                        .rotationX(rotX)
-                        .rotationY(rotY)
-                        .addModel()
-                        .condition(face, true)
-                        .end()
-                        .part()
-                        .modelFile(glassFaceModel)
-                        .rotationX(rotX)
-                        .rotationY(rotY)
-                        .addModel()
-                        .condition(face, false)
-                        .end();
-        MultiPartBlockStateBuilder glassBuilder = this.getMultipartBuilder(ObjectHolder.DARK_GLASS_BLOCK);
-        glassPartBuilder.accept(glassBuilder, BlockStateProperties.NORTH, 0, 0);
-        glassPartBuilder.accept(glassBuilder, BlockStateProperties.EAST, 0, 90);
-        glassPartBuilder.accept(glassBuilder, BlockStateProperties.SOUTH, 0, 180);
-        glassPartBuilder.accept(glassBuilder, BlockStateProperties.WEST, 0, -90);
-        glassPartBuilder.accept(glassBuilder, BlockStateProperties.UP, -90, 0);
-        glassPartBuilder.accept(glassBuilder, BlockStateProperties.DOWN, 90, 0);
-    }
-
-    private void registerSingleFaceModels()
-    {
-        Function<ResourceLocation, ModelBuilder<BlockModelBuilder>.ElementBuilder> singleFaceBase =
-                (id) -> this.models()
-                        .withExistingParent(id.toString(), mcLoc("block/block"))
-                        .texture("particle", "#face")
-                        .element()
-                        .from(0, 0, 0)
-                        .to(16, 16, 16)
-                        .face(Direction.NORTH)
-                        .cullface(Direction.NORTH)
-                        .texture("#face")
-                        .end();
-        singleFaceBase.apply(CUBE_FACE_NORTH);
-        singleFaceBase.apply(CUBE_FACE_NORTH_TINTED).faces(tintFunction);
+        ModelFile baseDarkGlassModel = this.models()
+                .withExistingParent(DarkGlassBlock.ID.getPath(), mcLoc("block/block"))
+                .texture("particle", darkTexLoc)
+                .texture("glass", mcLoc("block/glass"))
+                .texture("dark", modLoc(darkTexLoc))
+                .element()
+                .from(0, 0, 0)
+                .to(16, 16, 16)
+                .allFaces((face, builder) -> builder.texture("#glass").cullface(face))
+                .face(Direction.NORTH)
+                .texture("#dark")
+                .tintindex(0)
+                .end()
+                .end();
+        VariantBlockStateBuilder darkGlassVariantBuilder = this.getVariantBuilder(ObjectHolder.DARK_GLASS_BLOCK);
+        for (Direction dir : Direction.values())
+        {
+            darkGlassVariantBuilder.partialState()
+                    .with(BlockStateProperties.FACING, dir)
+                    .modelForState()
+                    .rotationX(FACE_ROTATION_MAP.get(dir).getLeft())
+                    .rotationY(FACE_ROTATION_MAP.get(dir).getRight())
+                    .modelFile(baseDarkGlassModel)
+                    .addModel();
+        }
     }
 
     private void registerFullBlockModels()

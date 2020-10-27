@@ -1,99 +1,27 @@
 {
-    "multipart": [
-        {
-            "when": {
-                "north": "true"
-            },
-            "apply": {
-                "model": "infinitedark:block/dark_face"
-            }
-        }, {
-            "when": {
-                "north": "false"
-            },
-            "apply": {
-                "model": "infinitedark:block/glass_face"
-            }
-        }, {
-            "when": {
-                "east": "true"
-            },
-            "apply": {
-                "model": "infinitedark:block/dark_face",
-                "y": 90
-            }
-        }, {
-            "when": {
-                "east": "false"
-            },
-            "apply": {
-                "model": "infinitedark:block/glass_face",
-                "y": 90
-            }
-        }, {
-            "when": {
-                "south": "true"
-            },
-            "apply": {
-                "model": "infinitedark:block/dark_face",
-                "y": 180
-            }
-        }, {
-            "when": {
-                "south": "false"
-            },
-            "apply": {
-                "model": "infinitedark:block/glass_face",
-                "y": 180
-            }
-        }, {
-            "when": {
-                "west": "true"
-            },
-            "apply": {
-                "model": "infinitedark:block/dark_face",
-                "y": -90
-            }
-        }, {
-            "when": {
-                "west": "false"
-            },
-            "apply": {
-                "model": "infinitedark:block/glass_face",
-                "y": -90
-            }
-        }, {
-            "when": {
-                "up": "true"
-            },
-            "apply": {
-                "model": "infinitedark:block/dark_face",
-                "x": -90
-            }
-        }, {
-            "when": {
-                "up": "false"
-            },
-            "apply": {
-                "model": "infinitedark:block/glass_face",
-                "x": -90
-            }
-        }, {
-            "when": {
-                "down": "true"
-            },
-            "apply": {
-                "model": "infinitedark:block/dark_face",
-                "x": 90
-            }
-        }, {
-            "when": {
-                "down": "false"
-            },
-            "apply": {
-                "model": "infinitedark:block/glass_face",
-                "x": 90
-            }
+    "variants": {
+        "facing=down": {
+            "model": "infinitedark:block/dark_glass",
+            "x": 90
+        },
+        "facing=up": {
+            "model": "infinitedark:block/dark_glass",
+            "x": -90
+        },
+        "facing=north": {
+            "model": "infinitedark:block/dark_glass"
+        },
+        "facing=south": {
+            "model": "infinitedark:block/dark_glass",
+            "y": 180
+        },
+        "facing=west": {
+            "model": "infinitedark:block/dark_glass",
+            "y": -90
+        },
+        "facing=east": {
+            "model": "infinitedark:block/dark_glass",
+            "y": 90
         }
-    ]
+    }
 }

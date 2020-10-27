@@ -18,6 +18,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 @Mod.EventBusSubscriber(modid = InfiniteDark.ID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ObjectHolder
@@ -43,13 +44,13 @@ import java.util.function.Function;
                 return new ItemStack(DARK_BLOCK);
             }
         };
-        DARK_BLOCK_ITEM = createBlockItem(DARK_BLOCK);
+        DARK_BLOCK_ITEM = createBlockItem(DARK_BLOCK, BlockItem::new);
         DARK_SLAB_BLOCK = new DarkSlabBlock();
-        DARK_SLAB_BLOCK_ITEM = createBlockItem(DARK_SLAB_BLOCK);
+        DARK_SLAB_BLOCK_ITEM = createBlockItem(DARK_SLAB_BLOCK, BlockItem::new);
         DARK_STAIRS_BLOCK = new DarkStairsBlock();
-        DARK_STAIRS_BLOCK_ITEM = createBlockItem(DARK_STAIRS_BLOCK);
+        DARK_STAIRS_BLOCK_ITEM = createBlockItem(DARK_STAIRS_BLOCK, BlockItem::new);
         DARK_GLASS_BLOCK = new DarkGlassBlock();
-        DARK_GLASS_BLOCK_ITEM = createBlockItem(DARK_GLASS_BLOCK);
+        DARK_GLASS_BLOCK_ITEM = createBlockItem(DARK_GLASS_BLOCK, BlockItem::new);
     }
 
     @SubscribeEvent public static void registerBlocks(RegistryEvent.Register<Block> event)
@@ -63,14 +64,16 @@ import java.util.function.Function;
                 .registerAll(DARK_BLOCK_ITEM, DARK_SLAB_BLOCK_ITEM, DARK_STAIRS_BLOCK_ITEM, DARK_GLASS_BLOCK_ITEM);
     }
 
-    private static BlockItem createBlockItem(Block block)
+    private static <T extends BlockItem> T createBlockItem(Block block,
+            BiFunction<Block, Item.Properties, T> constructor)
     {
-        return createBlockItem(block, (properties) -> properties);
+        return createBlockItem(block, (properties) -> properties, constructor);
     }
 
-    private static BlockItem createBlockItem(Block block, Function<Item.Properties, Item.Properties> properties)
+    private static <T extends BlockItem> T createBlockItem(Block block,
+            Function<Item.Properties, Item.Properties> properties, BiFunction<Block, Item.Properties, T> constructor)
     {
-        BlockItem item = new BlockItem(block, properties.apply(new Item.Properties().group(DARK_ITEM_GROUP)));
+        T item = constructor.apply(block, properties.apply(new Item.Properties().group(DARK_ITEM_GROUP)));
         item.setRegistryName(block.getRegistryName());
         return item;
     }

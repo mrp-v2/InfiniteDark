@@ -1,6 +1,0 @@
-{
-    "parent": "infinitedark:block/cube_face_north",
-    "textures": {
-        "face": "minecraft:block/glass"
-    }
-}

@@ -1,6 +1,0 @@
-{
-    "parent": "infinitedark:block/cube_face_north_tinted",
-    "textures": {
-        "face": "infinitedark:block/dark"
-    }
-}
