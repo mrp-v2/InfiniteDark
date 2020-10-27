@@ -79,7 +79,8 @@ public class BlockStateGenerator extends BlockStateProvider
         this.stairsBlock(ObjectHolder.DARK_STAIRS_BLOCK, this.models()
                 .withExistingParent(DarkStairsBlock.ID.getPath(), STAIRS_TINTED)
                 .texture("side", darkTexLoc)
-                .texture("top", darkTexLoc).texture("bottom", darkTexLoc), this.models()
+                .texture("top", darkTexLoc)
+                .texture("bottom", darkTexLoc), this.models()
                 .withExistingParent(DarkStairsBlock.ID.getPath() + "_inner", STAIRS_INNER_TINTED)
                 .texture("side", darkTexLoc)
                 .texture("top", darkTexLoc)
@@ -88,7 +89,6 @@ public class BlockStateGenerator extends BlockStateProvider
                 .texture("side", darkTexLoc)
                 .texture("top", darkTexLoc)
                 .texture("bottom", darkTexLoc));
-        final ResourceLocation glassTexLoc = mcLoc("block/glass");
         ModelFile baseDarkGlassModel = this.models()
                 .withExistingParent(DarkGlassBlock.ID.getPath(), mcLoc("block/block"))
                 .texture("particle", darkTexLoc)

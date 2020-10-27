@@ -53,9 +53,9 @@ public class RecipeGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.RecipeG
                 .setGroup(DarkStairsBlock.ID.toString())
                 .addCriterion("has_dark_block", hasDarkBlock)
                 .build(iFinishedRecipeConsumer);
-        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_GLASS_BLOCK, 2)
+        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_GLASS_BLOCK, 6)
                 .addIngredient(ObjectHolder.DARK_BLOCK)
-                .addIngredient(Blocks.GLASS)
+                .addIngredient(Blocks.GLASS, 5)
                 .setGroup(DarkGlassBlock.ID.toString())
                 .addCriterion("has_dark_block", hasDarkBlock)
                 .build(iFinishedRecipeConsumer);

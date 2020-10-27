@@ -2,14 +2,22 @@
     "type": "minecraft:crafting_shapeless",
     "group": "infinitedark:dark_glass",
     "ingredients": [
-        {
-            "item": "infinitedark:dark"
-        }, {
-            "item": "minecraft:glass"
-        }
+      {
+        "item": "infinitedark:dark"
+      }, {
+        "item": "minecraft:glass"
+      }, {
+        "item": "minecraft:glass"
+      }, {
+        "item": "minecraft:glass"
+      }, {
+        "item": "minecraft:glass"
+      }, {
+        "item": "minecraft:glass"
+      }
     ],
     "result": {
         "item": "infinitedark:dark_glass",
-        "count": 2
+      "count": 6
     }
 }
