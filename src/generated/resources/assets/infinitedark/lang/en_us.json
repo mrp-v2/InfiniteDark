@@ -3,5 +3,7 @@
     "block.infinitedark.dark_glass": "Dark Glass",
     "block.infinitedark.dark_slab": "Dark Slab",
     "block.infinitedark.dark_stairs": "Dark Stairs",
+    "infinitedark.keybind.category": "Infinite Dark",
+    "infinitedark.keybind.toggleDark": "Modify Dark Texture",
     "itemGroup.dark": "Infinite Dark"
 }
