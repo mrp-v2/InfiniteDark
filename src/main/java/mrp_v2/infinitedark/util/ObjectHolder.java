@@ -14,67 +14,54 @@ import net.minecraft.tags.ItemTags;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
-@Mod.EventBusSubscriber(modid = InfiniteDark.ID, bus = Mod.EventBusSubscriber.Bus.MOD) public class ObjectHolder
+public class ObjectHolder
 {
+    public static final DeferredRegister<Block> BLOCKS =
+            DeferredRegister.create(ForgeRegistries.BLOCKS, InfiniteDark.ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, InfiniteDark.ID);
     public static final ItemGroup DARK_ITEM_GROUP;
     public static final Tags.IOptionalNamedTag<Item> DARK_ITEMS_TAG = ItemTags.createOptional(Util.makeLoc("dark"));
-    public static final DarkBlock DARK_BLOCK;
-    public static final BlockItem DARK_BLOCK_ITEM;
-    public static final DarkSlabBlock DARK_SLAB_BLOCK;
-    public static final BlockItem DARK_SLAB_BLOCK_ITEM;
-    public static final DarkStairsBlock DARK_STAIRS_BLOCK;
-    public static final BlockItem DARK_STAIRS_BLOCK_ITEM;
-    public static final DarkGlassBlock DARK_GLASS_BLOCK;
-    public static final BlockItem DARK_GLASS_BLOCK_ITEM;
+    public static final RegistryObject<DarkBlock> DARK_BLOCK;
+    public static final RegistryObject<BlockItem> DARK_BLOCK_ITEM;
+    public static final RegistryObject<DarkSlabBlock> DARK_SLAB_BLOCK;
+    public static final RegistryObject<BlockItem> DARK_SLAB_BLOCK_ITEM;
+    public static final RegistryObject<DarkStairsBlock> DARK_STAIRS_BLOCK;
+    public static final RegistryObject<BlockItem> DARK_STAIRS_BLOCK_ITEM;
+    public static final RegistryObject<DarkGlassBlock> DARK_GLASS_BLOCK;
+    public static final RegistryObject<BlockItem> DARK_GLASS_BLOCK_ITEM;
 
     static
     {
-        DARK_BLOCK = new DarkBlock();
         DARK_ITEM_GROUP = new ItemGroup("dark")
         {
             @OnlyIn(Dist.CLIENT) @Override public ItemStack createIcon()
             {
-                return new ItemStack(DARK_BLOCK);
+                return new ItemStack(DARK_BLOCK.get());
             }
         };
-        DARK_BLOCK_ITEM = createBlockItem(DARK_BLOCK, BlockItem::new);
-        DARK_SLAB_BLOCK = new DarkSlabBlock();
-        DARK_SLAB_BLOCK_ITEM = createBlockItem(DARK_SLAB_BLOCK, BlockItem::new);
-        DARK_STAIRS_BLOCK = new DarkStairsBlock();
-        DARK_STAIRS_BLOCK_ITEM = createBlockItem(DARK_STAIRS_BLOCK, BlockItem::new);
-        DARK_GLASS_BLOCK = new DarkGlassBlock();
-        DARK_GLASS_BLOCK_ITEM = createBlockItem(DARK_GLASS_BLOCK, BlockItem::new);
+        DARK_BLOCK = BLOCKS.register(DarkBlock.ID, DarkBlock::new);
+        DARK_BLOCK_ITEM = ITEMS.register(DarkBlock.ID, () -> createBlockItem(DARK_BLOCK.get()));
+        DARK_SLAB_BLOCK = BLOCKS.register(DarkSlabBlock.ID, DarkSlabBlock::new);
+        DARK_SLAB_BLOCK_ITEM = ITEMS.register(DarkSlabBlock.ID, () -> createBlockItem(DARK_SLAB_BLOCK.get()));
+        DARK_STAIRS_BLOCK = BLOCKS.register(DarkStairsBlock.ID, DarkStairsBlock::new);
+        DARK_STAIRS_BLOCK_ITEM = ITEMS.register(DarkStairsBlock.ID, () -> createBlockItem(DARK_STAIRS_BLOCK.get()));
+        DARK_GLASS_BLOCK = BLOCKS.register(DarkGlassBlock.ID, DarkGlassBlock::new);
+        DARK_GLASS_BLOCK_ITEM = ITEMS.register(DarkGlassBlock.ID, () -> createBlockItem(DARK_GLASS_BLOCK.get()));
     }
 
-    @SubscribeEvent public static void registerBlocks(RegistryEvent.Register<Block> event)
+    public static void registerListeners(IEventBus bus)
     {
-        event.getRegistry().registerAll(DARK_BLOCK, DARK_SLAB_BLOCK, DARK_STAIRS_BLOCK, DARK_GLASS_BLOCK);
+        BLOCKS.register(bus);
+        ITEMS.register(bus);
     }
 
-    @SubscribeEvent public static void registerItems(RegistryEvent.Register<Item> event)
+    private static BlockItem createBlockItem(Block block)
     {
-        event.getRegistry()
-                .registerAll(DARK_BLOCK_ITEM, DARK_SLAB_BLOCK_ITEM, DARK_STAIRS_BLOCK_ITEM, DARK_GLASS_BLOCK_ITEM);
-    }
-
-    private static <T extends BlockItem> T createBlockItem(Block block,
-            BiFunction<Block, Item.Properties, T> constructor)
-    {
-        return createBlockItem(block, (properties) -> properties, constructor);
-    }
-
-    private static <T extends BlockItem> T createBlockItem(Block block,
-            Function<Item.Properties, Item.Properties> properties, BiFunction<Block, Item.Properties, T> constructor)
-    {
-        T item = constructor.apply(block, properties.apply(new Item.Properties().group(DARK_ITEM_GROUP)));
-        item.setRegistryName(block.getRegistryName());
-        return item;
+        return new BlockItem(block, new Item.Properties().group(DARK_ITEM_GROUP));
     }
 }

@@ -1,18 +1,19 @@
 package mrp_v2.infinitedark.block;
 
-import mrp_v2.infinitedark.util.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
+
+import java.util.function.Supplier;
 
 public class DarkBlock extends Block
 {
     public static final Block PARENT_BLOCK = Blocks.BLACK_CONCRETE;
-    public static final ResourceLocation ID = Util.makeLoc("dark");
+    public static final String ID = "dark";
+    public static Supplier<Properties> BASIC_PROPERTIES =
+            () -> Properties.from(PARENT_BLOCK).setAllowsSpawn(Blocks::neverAllowSpawn);
 
     public DarkBlock()
     {
-        super(Properties.from(PARENT_BLOCK).setAllowsSpawn(Blocks::neverAllowSpawn));
-        this.setRegistryName(ID);
+        super(BASIC_PROPERTIES.get());
     }
 }

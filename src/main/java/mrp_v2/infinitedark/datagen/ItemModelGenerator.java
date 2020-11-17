@@ -19,10 +19,10 @@ public class ItemModelGenerator extends ItemModelProvider
 
     @Override protected void registerModels()
     {
-        this.simpleWithExistingParent(DarkBlock.ID.getPath());
-        this.simpleWithExistingParent(DarkSlabBlock.ID.getPath());
-        this.simpleWithExistingParent(DarkStairsBlock.ID.getPath());
-        this.simpleWithExistingParent(DarkGlassBlock.ID.getPath());
+        this.simpleWithExistingParent(DarkBlock.ID);
+        this.simpleWithExistingParent(DarkSlabBlock.ID);
+        this.simpleWithExistingParent(DarkStairsBlock.ID);
+        this.simpleWithExistingParent(DarkGlassBlock.ID);
     }
 
     private ModelBuilder<ItemModelBuilder> simpleWithExistingParent(String path)

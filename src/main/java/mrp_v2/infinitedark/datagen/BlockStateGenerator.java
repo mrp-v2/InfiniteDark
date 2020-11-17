@@ -64,33 +64,30 @@ public class BlockStateGenerator extends BlockStateProvider
         this.registerSlabModels();
         this.registerStairModels();
         final String darkTexLoc = "block/dark";
-        this.simpleBlock(ObjectHolder.DARK_BLOCK,
-                this.models().withExistingParent(DarkBlock.ID.getPath(), CUBE_ALL_TINTED).texture("all", darkTexLoc));
-        this.slabBlock(ObjectHolder.DARK_SLAB_BLOCK,
-                models().withExistingParent(DarkSlabBlock.ID.getPath(), SLAB_TINTED)
-                        .texture("side", darkTexLoc)
-                        .texture("top", darkTexLoc)
-                        .texture("bottom", darkTexLoc),
-                models().withExistingParent(DarkSlabBlock.ID.getPath() + "_top", SLAB_TOP_TINTED)
-                        .texture("side", darkTexLoc)
-                        .texture("top", darkTexLoc)
-                        .texture("bottom", darkTexLoc),
-                models().getExistingFile(Util.makeLoc("block/" + DarkBlock.ID.getPath())));
-        this.stairsBlock(ObjectHolder.DARK_STAIRS_BLOCK, this.models()
-                .withExistingParent(DarkStairsBlock.ID.getPath(), STAIRS_TINTED)
+        this.simpleBlock(ObjectHolder.DARK_BLOCK.get(),
+                this.models().withExistingParent(DarkBlock.ID, CUBE_ALL_TINTED).texture("all", darkTexLoc));
+        this.slabBlock(ObjectHolder.DARK_SLAB_BLOCK.get(), models().withExistingParent(DarkSlabBlock.ID, SLAB_TINTED)
+                .texture("side", darkTexLoc)
+                .texture("top", darkTexLoc)
+                .texture("bottom", darkTexLoc), models().withExistingParent(DarkSlabBlock.ID + "_top", SLAB_TOP_TINTED)
+                .texture("side", darkTexLoc)
+                .texture("top", darkTexLoc)
+                .texture("bottom", darkTexLoc), models().getExistingFile(Util.makeLoc("block/" + DarkBlock.ID)));
+        this.stairsBlock(ObjectHolder.DARK_STAIRS_BLOCK.get(), this.models()
+                .withExistingParent(DarkStairsBlock.ID, STAIRS_TINTED)
                 .texture("side", darkTexLoc)
                 .texture("top", darkTexLoc)
                 .texture("bottom", darkTexLoc), this.models()
-                .withExistingParent(DarkStairsBlock.ID.getPath() + "_inner", STAIRS_INNER_TINTED)
+                .withExistingParent(DarkStairsBlock.ID + "_inner", STAIRS_INNER_TINTED)
                 .texture("side", darkTexLoc)
                 .texture("top", darkTexLoc)
                 .texture("bottom", darkTexLoc), this.models()
-                .withExistingParent(DarkStairsBlock.ID.getPath() + "_outer", STAIRS_OUTER_TINTED)
+                .withExistingParent(DarkStairsBlock.ID + "_outer", STAIRS_OUTER_TINTED)
                 .texture("side", darkTexLoc)
                 .texture("top", darkTexLoc)
                 .texture("bottom", darkTexLoc));
         ModelFile baseDarkGlassModel = this.models()
-                .withExistingParent(DarkGlassBlock.ID.getPath(), mcLoc("block/block"))
+                .withExistingParent(DarkGlassBlock.ID, mcLoc("block/block"))
                 .texture("particle", darkTexLoc)
                 .texture("glass", mcLoc("block/glass"))
                 .texture("dark", modLoc(darkTexLoc))
@@ -103,7 +100,7 @@ public class BlockStateGenerator extends BlockStateProvider
                 .tintindex(0)
                 .end()
                 .end();
-        VariantBlockStateBuilder darkGlassVariantBuilder = this.getVariantBuilder(ObjectHolder.DARK_GLASS_BLOCK);
+        VariantBlockStateBuilder darkGlassVariantBuilder = this.getVariantBuilder(ObjectHolder.DARK_GLASS_BLOCK.get());
         for (Direction dir : Direction.values())
         {
             darkGlassVariantBuilder.partialState()

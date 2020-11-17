@@ -15,7 +15,7 @@ public class EventHandler
 {
     @SubscribeEvent public static void clientSetup(final FMLClientSetupEvent event)
     {
-        RenderTypeLookup.setRenderLayer(ObjectHolder.DARK_GLASS_BLOCK, RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ObjectHolder.DARK_GLASS_BLOCK.get(), RenderType.getCutout());
         ClientRegistry.registerKeyBinding(mrp_v2.infinitedark.client.util.ObjectHolder.DARK_TOGGLE);
     }
 }

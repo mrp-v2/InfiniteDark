@@ -1,7 +1,5 @@
 package mrp_v2.infinitedark.block;
 
-import mrp_v2.infinitedark.util.ObjectHolder;
-import mrp_v2.infinitedark.util.Util;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,7 +8,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -18,16 +15,15 @@ import javax.annotation.Nullable;
 
 public class DarkGlassBlock extends AbstractGlassBlock
 {
-    public static final ResourceLocation ID = Util.makeLoc(DarkBlock.ID.getPath() + "_glass");
+    public static final String ID = DarkBlock.ID + "_glass";
 
     public DarkGlassBlock()
     {
-        super(Properties.from(ObjectHolder.DARK_BLOCK)
+        super(DarkBlock.BASIC_PROPERTIES.get()
                 .notSolid()
                 .setOpaque(Blocks::isntSolid)
                 .setSuffocates(Blocks::isntSolid)
                 .setBlocksVision(Blocks::isntSolid));
-        this.setRegistryName(ID);
     }
 
     @Nullable @Override public BlockState getStateForPlacement(BlockItemUseContext context)
