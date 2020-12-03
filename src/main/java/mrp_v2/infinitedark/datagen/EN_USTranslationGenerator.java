@@ -1,10 +1,10 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.util.ObjectHolder;
-import mrp_v2.mrp_v2datagenlibrary.datagen.TranslationGenerator;
+import mrp_v2.mrplibrary.datagen.providers.LanguageProvider;
 import net.minecraft.data.DataGenerator;
 
-public class EN_USTranslationGenerator extends TranslationGenerator
+public class EN_USTranslationGenerator extends LanguageProvider
 {
     public EN_USTranslationGenerator(DataGenerator gen, String modid)
     {

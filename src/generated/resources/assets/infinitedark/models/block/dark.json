@@ -1,5 +1,5 @@
 {
-  "parent": "infinitedark:block/cube_all_tinted",
+  "parent": "mrplibrary:block/cube_all_tinted",
   "textures": {
     "all": "infinitedark:block/dark"
   }

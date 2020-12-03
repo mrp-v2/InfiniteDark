@@ -3,7 +3,7 @@ package mrp_v2.infinitedark.datagen;
 import mrp_v2.infinitedark.util.ObjectHolder;
 import net.minecraft.data.loot.BlockLootTables;
 
-class LootTables extends mrp_v2.mrp_v2datagenlibrary.datagen.LootTables
+class LootTables extends mrp_v2.mrplibrary.datagen.BlockLootTables
 {
     public LootTables()
     {

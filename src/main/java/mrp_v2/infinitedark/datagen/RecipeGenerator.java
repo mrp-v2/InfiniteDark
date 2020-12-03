@@ -14,7 +14,7 @@ import net.minecraftforge.common.Tags;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class RecipeGenerator extends mrp_v2.mrp_v2datagenlibrary.datagen.RecipeGenerator
+public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeProvider
 {
     protected RecipeGenerator(DataGenerator dataGeneratorIn, String modId)
     {

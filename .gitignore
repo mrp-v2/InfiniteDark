@@ -4,11 +4,7 @@
 # gradle
 /build/
 /.gradle/
-/gradle/
-/gradlew
-/gradlew.bat
 
 # other
 /run/
-/src/generated/resources/.cache/
 /logs/
