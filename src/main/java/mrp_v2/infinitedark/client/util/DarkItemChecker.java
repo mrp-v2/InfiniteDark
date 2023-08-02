@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.Mod;
         {
             if (!ClientConfig.INSTANCE.keybindToggleMode())
             {
-                boolean newModifyingDark = mrp_v2.infinitedark.client.util.ObjectHolder.DARK_TOGGLE.isKeyDown();
+                boolean newModifyingDark = mrp_v2.infinitedark.client.util.ObjectHolder.DARK_TOGGLE.isDown();
                 if (modifyingDark != newModifyingDark)
                 {
                     modifyingDark = newModifyingDark;
@@ -38,8 +38,8 @@ import net.minecraftforge.fml.common.Mod;
                 return;
             }
             ItemStack[] currentHeldItems = new ItemStack[2];
-            currentHeldItems[0] = player.getHeldItemMainhand();
-            currentHeldItems[1] = player.getHeldItemOffhand();
+            currentHeldItems[0] = player.getMainHandItem();
+            currentHeldItems[1] = player.getOffhandItem();
             boolean currentHasDark =
                     mrp_v2.infinitedark.util.ObjectHolder.DARK_ITEMS_TAG.contains(currentHeldItems[0].getItem()) ||
                             ObjectHolder.DARK_ITEMS_TAG.contains(currentHeldItems[1].getItem());
@@ -53,9 +53,9 @@ import net.minecraftforge.fml.common.Mod;
 
     private static void updateDarkBlocks()
     {
-        for (ChunkRenderDispatcher.ChunkRender chunkRender : Minecraft.getInstance().worldRenderer.viewFrustum.renderChunks)
+        for (ChunkRenderDispatcher.ChunkRender chunkRender : Minecraft.getInstance().levelRenderer.viewArea.chunks)
         {
-            chunkRender.setNeedsUpdate(false);
+            chunkRender.setDirty(false);
         }
     }
 
@@ -68,7 +68,7 @@ import net.minecraftforge.fml.common.Mod;
     {
         if (ClientConfig.INSTANCE.useKeyBinding())
         {
-            if (mrp_v2.infinitedark.client.util.ObjectHolder.DARK_TOGGLE.isPressed())
+            if (mrp_v2.infinitedark.client.util.ObjectHolder.DARK_TOGGLE.consumeClick())
             {
                 if (ClientConfig.INSTANCE.keybindToggleMode())
                 {

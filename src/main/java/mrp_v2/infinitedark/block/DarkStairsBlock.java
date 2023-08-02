@@ -9,6 +9,6 @@ public class DarkStairsBlock extends StairsBlock
 
     public DarkStairsBlock()
     {
-        super(() -> ObjectHolder.DARK_BLOCK.get().getDefaultState(), DarkBlock.BASIC_PROPERTIES.get());
+        super(() -> ObjectHolder.DARK_BLOCK.get().defaultBlockState(), DarkBlock.BASIC_PROPERTIES.get());
     }
 }

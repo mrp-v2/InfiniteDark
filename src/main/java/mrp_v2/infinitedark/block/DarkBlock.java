@@ -5,12 +5,14 @@ import net.minecraft.block.Blocks;
 
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class DarkBlock extends Block
 {
     public static final Block PARENT_BLOCK = Blocks.BLACK_CONCRETE;
     public static final String ID = "dark";
     public static Supplier<Properties> BASIC_PROPERTIES =
-            () -> Properties.from(PARENT_BLOCK).setAllowsSpawn(Blocks::neverAllowSpawn);
+            () -> Properties.copy(PARENT_BLOCK).isValidSpawn(Blocks::never);
 
     public DarkBlock()
     {

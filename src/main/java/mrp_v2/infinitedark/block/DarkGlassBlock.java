@@ -20,26 +20,26 @@ public class DarkGlassBlock extends AbstractGlassBlock
     public DarkGlassBlock()
     {
         super(DarkBlock.BASIC_PROPERTIES.get()
-                .notSolid()
-                .setOpaque(Blocks::isntSolid)
-                .setSuffocates(Blocks::isntSolid)
-                .setBlocksVision(Blocks::isntSolid));
+                .noOcclusion()
+                .isRedstoneConductor(Blocks::never)
+                .isSuffocating(Blocks::never)
+                .isViewBlocking(Blocks::never));
     }
 
     @Nullable @Override public BlockState getStateForPlacement(BlockItemUseContext context)
     {
         return super.getStateForPlacement(context)
-                .with(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
+                .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
 
-    @Override protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    @Override protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
     {
         builder.add(BlockStateProperties.FACING);
     }
 
     @Override public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
     {
-        if (state.get(BlockStateProperties.FACING) == Direction.UP)
+        if (state.getValue(BlockStateProperties.FACING) == Direction.UP)
         {
             return false;
         }

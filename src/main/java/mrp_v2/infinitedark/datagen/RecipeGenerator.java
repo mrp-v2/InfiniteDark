@@ -21,35 +21,35 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
         super(dataGeneratorIn, modId);
     }
 
-    @Override protected void registerRecipes(Consumer<IFinishedRecipe> iFinishedRecipeConsumer)
+    @Override protected void buildShapelessRecipes(Consumer<IFinishedRecipe> iFinishedRecipeConsumer)
     {
-        Ingredient cobble = Ingredient.fromTag(Tags.Items.COBBLESTONE);
+        Ingredient cobble = Ingredient.of(Tags.Items.COBBLESTONE);
         ArrayList<Ingredient> acceptedBlackDyes = new ArrayList<>();
-        acceptedBlackDyes.add(Ingredient.fromTag(Tags.Items.DYES_BLACK));
-        acceptedBlackDyes.add(Ingredient.fromItems(Items.COAL, Items.CHARCOAL));
+        acceptedBlackDyes.add(Ingredient.of(Tags.Items.DYES_BLACK));
+        acceptedBlackDyes.add(Ingredient.of(Items.COAL, Items.CHARCOAL));
         Ingredient blacks = Ingredient.merge(acceptedBlackDyes);
-        InventoryChangeTrigger.Instance hasDarkBlock = hasItem(ObjectHolder.DARK_BLOCK.get());
-        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_BLOCK.get(), 8)
-                .addIngredient(cobble, 8)
-                .addIngredient(blacks)
-                .addCriterion("has_cobble", hasItem(Tags.Items.COBBLESTONE))
-                .build(iFinishedRecipeConsumer);
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.DARK_SLAB_BLOCK.get(), 6)
-                .patternLine("###")
-                .key('#', ObjectHolder.DARK_BLOCK.get())
-                .addCriterion("has_dark_block", hasDarkBlock)
-                .build(iFinishedRecipeConsumer);
-        ShapedRecipeBuilder.shapedRecipe(ObjectHolder.DARK_STAIRS_BLOCK.get(), 4)
-                .patternLine("#  ")
-                .patternLine("## ")
-                .patternLine("###")
-                .key('#', ObjectHolder.DARK_BLOCK.get())
-                .addCriterion("has_dark_block", hasDarkBlock)
-                .build(iFinishedRecipeConsumer);
-        ShapelessRecipeBuilder.shapelessRecipe(ObjectHolder.DARK_GLASS_BLOCK.get(), 6)
-                .addIngredient(ObjectHolder.DARK_BLOCK.get())
-                .addIngredient(Blocks.GLASS, 5)
-                .addCriterion("has_dark_block", hasDarkBlock)
-                .build(iFinishedRecipeConsumer);
+        InventoryChangeTrigger.Instance hasDarkBlock = has(ObjectHolder.DARK_BLOCK.get());
+        ShapelessRecipeBuilder.shapeless(ObjectHolder.DARK_BLOCK.get(), 8)
+                .requires(cobble, 8)
+                .requires(blacks)
+                .unlockedBy("has_cobble", has(Tags.Items.COBBLESTONE))
+                .save(iFinishedRecipeConsumer);
+        ShapedRecipeBuilder.shaped(ObjectHolder.DARK_SLAB_BLOCK.get(), 6)
+                .pattern("###")
+                .define('#', ObjectHolder.DARK_BLOCK.get())
+                .unlockedBy("has_dark_block", hasDarkBlock)
+                .save(iFinishedRecipeConsumer);
+        ShapedRecipeBuilder.shaped(ObjectHolder.DARK_STAIRS_BLOCK.get(), 4)
+                .pattern("#  ")
+                .pattern("## ")
+                .pattern("###")
+                .define('#', ObjectHolder.DARK_BLOCK.get())
+                .unlockedBy("has_dark_block", hasDarkBlock)
+                .save(iFinishedRecipeConsumer);
+        ShapelessRecipeBuilder.shapeless(ObjectHolder.DARK_GLASS_BLOCK.get(), 6)
+                .requires(ObjectHolder.DARK_BLOCK.get())
+                .requires(Blocks.GLASS, 5)
+                .unlockedBy("has_dark_block", hasDarkBlock)
+                .save(iFinishedRecipeConsumer);
     }
 }

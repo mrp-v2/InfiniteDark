@@ -7,10 +7,10 @@ class LootTables extends mrp_v2.mrplibrary.datagen.BlockLootTables
 {
     public LootTables()
     {
-        this.addLootTable(ObjectHolder.DARK_BLOCK.get(), this::registerDropSelfLootTable);
+        this.addLootTable(ObjectHolder.DARK_BLOCK.get(), this::dropSelf);
         this.addLootTable(ObjectHolder.DARK_SLAB_BLOCK.get(),
-                (block) -> this.registerLootTable(block, BlockLootTables::droppingSlab));
-        this.addLootTable(ObjectHolder.DARK_STAIRS_BLOCK.get(), this::registerDropSelfLootTable);
-        this.addLootTable(ObjectHolder.DARK_GLASS_BLOCK.get(), this::registerDropSelfLootTable);
+                (block) -> this.add(block, BlockLootTables::createSlabItemTable));
+        this.addLootTable(ObjectHolder.DARK_STAIRS_BLOCK.get(), this::dropSelf);
+        this.addLootTable(ObjectHolder.DARK_GLASS_BLOCK.get(), this::dropSelf);
     }
 }

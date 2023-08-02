@@ -15,9 +15,9 @@ public class ItemTagGenerator extends mrp_v2.mrplibrary.datagen.providers.ItemTa
         super(dataGenerator, blockTagProvider, modId, existingFileHelper);
     }
 
-    @Override protected void registerTags()
+    @Override protected void addTags()
     {
-        this.getOrCreateBuilder(ObjectHolder.DARK_ITEMS_TAG)
+        this.tag(ObjectHolder.DARK_ITEMS_TAG)
                 .add(ObjectHolder.DARK_BLOCK_ITEM.get(), ObjectHolder.DARK_SLAB_BLOCK_ITEM.get(),
                         ObjectHolder.DARK_STAIRS_BLOCK_ITEM.get(), ObjectHolder.DARK_GLASS_BLOCK_ITEM.get());
     }

@@ -39,7 +39,7 @@ public class ObjectHolder
     {
         DARK_ITEM_GROUP = new ItemGroup("dark")
         {
-            @OnlyIn(Dist.CLIENT) @Override public ItemStack createIcon()
+            @OnlyIn(Dist.CLIENT) @Override public ItemStack makeIcon()
             {
                 return new ItemStack(DARK_BLOCK.get());
             }
@@ -62,6 +62,6 @@ public class ObjectHolder
 
     private static BlockItem createBlockItem(Block block)
     {
-        return new BlockItem(block, new Item.Properties().group(DARK_ITEM_GROUP));
+        return new BlockItem(block, new Item.Properties().tab(DARK_ITEM_GROUP));
     }
 }
