@@ -178,6 +178,7 @@ jar {
 jar.finalizedBy('reobfJar')
 
 processResources {
+    setDuplicatesStrategy(DuplicatesStrategy.INCLUDE)
     String tempMCVersion = mcVersion
     if (mcVersion == "1.16.5")
     {

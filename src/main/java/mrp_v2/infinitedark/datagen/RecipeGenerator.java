@@ -21,7 +21,7 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
         super(dataGeneratorIn, modId);
     }
 
-    @Override protected void buildShapelessRecipes(Consumer<FinishedRecipe> iFinishedRecipeConsumer)
+    @Override protected void buildCraftingRecipes(Consumer<FinishedRecipe> iFinishedRecipeConsumer)
     {
         Ingredient cobble = Ingredient.of(Tags.Items.COBBLESTONE);
         ArrayList<Ingredient> acceptedBlackDyes = new ArrayList<>();

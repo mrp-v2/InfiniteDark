@@ -41,8 +41,8 @@ import net.minecraftforge.fml.common.Mod;
             currentHeldItems[0] = player.getMainHandItem();
             currentHeldItems[1] = player.getOffhandItem();
             boolean currentHasDark =
-                    mrp_v2.infinitedark.util.ObjectHolder.DARK_ITEMS_TAG.contains(currentHeldItems[0].getItem()) ||
-                            ObjectHolder.DARK_ITEMS_TAG.contains(currentHeldItems[1].getItem());
+                    mrp_v2.infinitedark.util.ObjectHolder.GetDarkItemsTag().contains(currentHeldItems[0].getItem()) ||
+                            ObjectHolder.GetDarkItemsTag().contains(currentHeldItems[1].getItem());
             if (modifyingDark != currentHasDark)
             {
                 modifyingDark = currentHasDark;

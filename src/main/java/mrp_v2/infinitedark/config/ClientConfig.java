@@ -5,7 +5,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 
@@ -48,7 +48,7 @@ public class ClientConfig
         builder.pop();
     }
 
-    @SubscribeEvent public static void onFileChange(final ModConfig.Reloading configEvent)
+    @SubscribeEvent public static void onFileChange(final ModConfigEvent.Reloading configEvent)
     {
         LogManager.getLogger().debug(InfiniteDark.ID + " config just got changed on the file system!");
         INSTANCE.updateCachedValues();
@@ -62,7 +62,7 @@ public class ClientConfig
         this.cahcedKeybindToggleMode = this.keybindToggleMode.get();
     }
 
-    @SubscribeEvent public static void onLoad(final ModConfig.Loading configEvent)
+    @SubscribeEvent public static void onLoad(final ModConfigEvent.Loading configEvent)
     {
         LogManager.getLogger()
                 .debug("Loaded " + InfiniteDark.ID + " config file {}", configEvent.getConfig().getFileName());

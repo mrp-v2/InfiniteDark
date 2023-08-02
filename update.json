@@ -6,6 +6,8 @@
     "latest": "1.16.5-3.0.0.0-forge",
     "recommended": "1.16.5-3.0.0.0-forge",
     "1.16.5-recommended": "1.16.5-3.0.0.0-forge",
-    "1.16.5-latest": "1.16.5-3.0.0.0-forge"
+    "1.16.5-latest": "1.16.5-3.0.0.0-forge",
+    "1.18.2-recommended": "1.18.2-4.0.0.0-forge",
+    "1.18.2-latest": "1.18.2-4.0.0.0-forge"
   }
 }

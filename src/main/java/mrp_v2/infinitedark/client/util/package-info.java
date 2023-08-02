@@ -1,6 +1,0 @@
-@MethodsReturnNonnullByDefault @ParametersAreNonnullByDefault
-package mrp_v2.infinitedark.client.util;
-
-import mcp.MethodsReturnNonnullByDefault;
-
-import javax.annotation.ParametersAreNonnullByDefault;
