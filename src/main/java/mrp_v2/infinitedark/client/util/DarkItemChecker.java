@@ -4,9 +4,9 @@ import mrp_v2.infinitedark.InfiniteDark;
 import mrp_v2.infinitedark.config.ClientConfig;
 import mrp_v2.infinitedark.util.ObjectHolder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.event.TickEvent;
@@ -32,7 +32,7 @@ import net.minecraftforge.fml.common.Mod;
             }
         } else
         {
-            ClientPlayerEntity player = Minecraft.getInstance().player;
+            LocalPlayer player = Minecraft.getInstance().player;
             if (player == null)
             {
                 return;
@@ -53,7 +53,7 @@ import net.minecraftforge.fml.common.Mod;
 
     private static void updateDarkBlocks()
     {
-        for (ChunkRenderDispatcher.ChunkRender chunkRender : Minecraft.getInstance().levelRenderer.viewArea.chunks)
+        for (ChunkRenderDispatcher.RenderChunk chunkRender : Minecraft.getInstance().levelRenderer.viewArea.chunks)
         {
             chunkRender.setDirty(false);
         }

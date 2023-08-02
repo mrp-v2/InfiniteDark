@@ -1,7 +1,7 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.util.ObjectHolder;
-import net.minecraft.data.BlockTagsProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 

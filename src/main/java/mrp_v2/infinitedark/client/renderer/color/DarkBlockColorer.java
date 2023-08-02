@@ -4,12 +4,12 @@ import mrp_v2.infinitedark.InfiniteDark;
 import mrp_v2.infinitedark.client.util.DarkItemChecker;
 import mrp_v2.infinitedark.config.ClientConfig;
 import mrp_v2.infinitedark.util.ObjectHolder;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockDisplayReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import javax.annotation.Nullable;
 
 @Mod.EventBusSubscriber(modid = InfiniteDark.ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-@OnlyIn(Dist.CLIENT) public class DarkBlockColorer implements IBlockColor, IItemColor
+@OnlyIn(Dist.CLIENT) public class DarkBlockColorer implements BlockColor, ItemColor
 {
     private static final DarkBlockColorer INSTANCE = new DarkBlockColorer();
 
@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
     }
 
     @Override
-    public int getColor(BlockState blockState, @Nullable IBlockDisplayReader iBlockDisplayReader,
+    public int getColor(BlockState blockState, @Nullable BlockAndTintGetter iBlockDisplayReader,
             @Nullable BlockPos pos, int tint)
     {
         return getColor();

@@ -1,15 +1,15 @@
 package mrp_v2.infinitedark.block;
 
-import net.minecraft.block.AbstractGlassBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.AbstractGlassBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 
 import javax.annotation.Nullable;
 
@@ -26,18 +26,18 @@ public class DarkGlassBlock extends AbstractGlassBlock
                 .isViewBlocking(Blocks::never));
     }
 
-    @Nullable @Override public BlockState getStateForPlacement(BlockItemUseContext context)
+    @Nullable @Override public BlockState getStateForPlacement(BlockPlaceContext context)
     {
         return super.getStateForPlacement(context)
                 .setValue(BlockStateProperties.FACING, context.getNearestLookingDirection().getOpposite());
     }
 
-    @Override protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
+    @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         builder.add(BlockStateProperties.FACING);
     }
 
-    @Override public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
+    @Override public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos)
     {
         if (state.getValue(BlockStateProperties.FACING) == Direction.UP)
         {

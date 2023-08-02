@@ -1,14 +1,14 @@
 package mrp_v2.infinitedark.datagen;
 
 import mrp_v2.infinitedark.util.ObjectHolder;
-import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.block.Blocks;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.IFinishedRecipe;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.Tags;
 
 import java.util.ArrayList;
@@ -21,14 +21,14 @@ public class RecipeGenerator extends mrp_v2.mrplibrary.datagen.providers.RecipeP
         super(dataGeneratorIn, modId);
     }
 
-    @Override protected void buildShapelessRecipes(Consumer<IFinishedRecipe> iFinishedRecipeConsumer)
+    @Override protected void buildShapelessRecipes(Consumer<FinishedRecipe> iFinishedRecipeConsumer)
     {
         Ingredient cobble = Ingredient.of(Tags.Items.COBBLESTONE);
         ArrayList<Ingredient> acceptedBlackDyes = new ArrayList<>();
         acceptedBlackDyes.add(Ingredient.of(Tags.Items.DYES_BLACK));
         acceptedBlackDyes.add(Ingredient.of(Items.COAL, Items.CHARCOAL));
         Ingredient blacks = Ingredient.merge(acceptedBlackDyes);
-        InventoryChangeTrigger.Instance hasDarkBlock = has(ObjectHolder.DARK_BLOCK.get());
+        InventoryChangeTrigger.TriggerInstance hasDarkBlock = has(ObjectHolder.DARK_BLOCK.get());
         ShapelessRecipeBuilder.shapeless(ObjectHolder.DARK_BLOCK.get(), 8)
                 .requires(cobble, 8)
                 .requires(blacks)

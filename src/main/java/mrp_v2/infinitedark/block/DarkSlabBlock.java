@@ -1,6 +1,6 @@
 package mrp_v2.infinitedark.block;
 
-import net.minecraft.block.SlabBlock;
+import net.minecraft.world.level.block.SlabBlock;
 
 public class DarkSlabBlock extends SlabBlock
 {

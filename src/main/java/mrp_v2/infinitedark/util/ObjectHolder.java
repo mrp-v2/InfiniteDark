@@ -5,11 +5,11 @@ import mrp_v2.infinitedark.block.DarkBlock;
 import mrp_v2.infinitedark.block.DarkGlassBlock;
 import mrp_v2.infinitedark.block.DarkSlabBlock;
 import mrp_v2.infinitedark.block.DarkStairsBlock;
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -24,7 +24,7 @@ public class ObjectHolder
     public static final DeferredRegister<Block> BLOCKS =
             DeferredRegister.create(ForgeRegistries.BLOCKS, InfiniteDark.ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, InfiniteDark.ID);
-    public static final ItemGroup DARK_ITEM_GROUP;
+    public static final CreativeModeTab DARK_ITEM_GROUP;
     public static final Tags.IOptionalNamedTag<Item> DARK_ITEMS_TAG = ItemTags.createOptional(Util.makeLoc("dark"));
     public static final RegistryObject<DarkBlock> DARK_BLOCK;
     public static final RegistryObject<BlockItem> DARK_BLOCK_ITEM;
@@ -37,7 +37,7 @@ public class ObjectHolder
 
     static
     {
-        DARK_ITEM_GROUP = new ItemGroup("dark")
+        DARK_ITEM_GROUP = new CreativeModeTab("dark")
         {
             @OnlyIn(Dist.CLIENT) @Override public ItemStack makeIcon()
             {
