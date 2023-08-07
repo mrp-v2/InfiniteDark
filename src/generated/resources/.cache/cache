@@ -27,3 +27,4 @@ c11aef207d85fead432bd8902b2bef8edd919bbb data/infinitedark/loot_tables/blocks/da
 dc104722fbebdb706f7033a4abfb9fd43172d41b data/infinitedark/recipes/dark_slab.json
 e9a1e7c2b1169e8c386e8e665b6bfa850f8effb6 data/infinitedark/recipes/dark_stairs.json
 5a79200afb49c633a5021809674eb89d083abb60 data/infinitedark/tags/items/dark.json
+30de3d50097b0bfd3085ee03f883b74bf6e127f7 data/minecraft/tags/blocks/mineable/pickaxe.json
